@@ -1,11 +1,11 @@
 <template>
   <div class="board">
-    <div class="column" v-for="(rowCells, col) in board" :key="col">
+    <div v-for="(rowCells, col) in board" :key="col" class="column">
       <Cell
-        class="cell"
-        :player="jeton"
         v-for="(jeton, row) in rowCells"
         :key="row"
+        class="cell"
+        :player="jeton"
         :position="{ column: col, row: row }"
       />
     </div>
@@ -13,24 +13,23 @@
 </template>
 
 <script lang='ts'>
-import Vue from "vue";
-import Cell from "./Cell.vue";
+import Vue from 'vue'
+import Cell from './Cell.vue'
 
 export default Vue.extend({
-  name: "Board",
-
-  data() {
-    return {
-      board: this.$store.state.board,
-    };
-  },
+  name: 'Board',
 
   components: {
-    Cell,
+    Cell
   },
-});
-</script>
 
+  data () {
+    return {
+      board: this.$store.state.board
+    }
+  }
+})
+</script>
 
 <style scoped>
 .board {
@@ -41,4 +40,3 @@ export default Vue.extend({
   margin: 0.2rem;
 }
 </style>
-
