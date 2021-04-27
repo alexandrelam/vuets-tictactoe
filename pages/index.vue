@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h1 v-if="isPartieEnCours">
       {{ currentPlayer }} is playing!
     </h1>
@@ -9,7 +9,9 @@
     <h1 v-else>
       {{ currentPlayer }} won!
     </h1>
-    <Board />
+    <div class="board-wrapper">
+      <Board />
+    </div>
     <button @click="restart">
       Restart
     </button>
@@ -39,3 +41,51 @@ export default Vue.extend({
   }
 })
 </script>
+
+<style>
+* {
+  --bg-dark: #202135;
+  --bg: #363752;
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: white;
+  margin: 0;
+}
+
+h1 {
+  margin-bottom: 7rem;
+  font-size: 3rem;
+}
+
+.container {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 40rem;
+  margin: auto;
+}
+
+.board-wrapper {
+  padding: 3rem;
+  background-color: var(--bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.5rem;
+}
+
+button {
+  width: 8rem;
+  height: 2rem;
+  font-size: 1rem;
+  margin-top: 3rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: white;
+}
+</style>
