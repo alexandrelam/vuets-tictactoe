@@ -7,6 +7,7 @@
         class="cell"
         :player="jeton"
         :position="{ column: col, row: row }"
+        :class="[(jeton=='O') ? 'purple' : 'yellow']"
       />
     </div>
   </div>
@@ -28,6 +29,7 @@ export default Vue.extend({
       board: this.$store.state.board
     }
   }
+
 })
 </script>
 
@@ -37,6 +39,14 @@ export default Vue.extend({
 }
 
 .cell {
-  margin: 1rem;
+  margin: 1.6rem 0.8rem;
+}
+
+.yellow{
+  color: #ffae12;
+}
+
+.purple {
+  color: #7321db;
 }
 </style>

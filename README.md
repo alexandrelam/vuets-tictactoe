@@ -2,7 +2,7 @@
 
 A simple TicTacToe made with Nuxt !
 
-![gif](./assets/version1.gif)
+![gif](./assets/version2.gif)
 
 ## Installation 
 

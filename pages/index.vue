@@ -56,13 +56,13 @@ body {
   margin: 0;
 }
 
-h1{
-    margin-bottom: 7rem;
-    font-size:3rem;
+h1 {
+  margin-bottom: 7rem;
+  font-size: 3rem;
 }
 
 .container {
-  height: 80vh;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -77,5 +77,15 @@ h1{
   justify-content: center;
   align-items: center;
   border-radius: 0.5rem;
+}
+
+button {
+  width: 8rem;
+  height: 2rem;
+  font-size: 1rem;
+  margin-top: 3rem;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: white;
 }
 </style>
