@@ -56,7 +56,8 @@ export default Vue.extend({
   align-items: center;
   justify-content: center;
   border: solid;
-  padding: 1rem 2.5rem;
+  width: 8rem;
+  height: 8rem;
 }
 </style>
 
