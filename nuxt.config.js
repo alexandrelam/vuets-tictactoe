@@ -21,6 +21,9 @@ export default {
     ]
   },
 
+  extends: [
+    '@nuxtjs/eslint-config-typescript'
+  ],
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
   ],
