@@ -37,6 +37,6 @@ export default Vue.extend({
 }
 
 .cell {
-  margin: 0.2rem;
+  margin: 1rem;
 }
 </style>

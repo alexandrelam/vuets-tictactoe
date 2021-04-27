@@ -49,8 +49,11 @@ export default Vue.extend({
   display: flex;
   align-items: center;
   justify-content: center;
-  border: solid;
   width: 8rem;
   height: 8rem;
+  color: black;
+  border-radius:0.7rem;
+  background-color: white;
+  font-size: 2rem;
 }
 </style>
