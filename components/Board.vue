@@ -1,11 +1,12 @@
 <template>
   <div class="board">
-    <div class="column" v-for="(row, index) in board" :key="index">
+    <div class="column" v-for="(rowCells, col) in board" :key="col">
       <Cell
         class="cell"
         :player="jeton"
-        v-for="(jeton, index) in row"
-        :key="index"
+        v-for="(jeton, row) in rowCells"
+        :key="row"
+        :position="{ column: col, row: row }"
       />
     </div>
   </div>
@@ -18,12 +19,10 @@ import Cell from "./Cell.vue";
 export default Vue.extend({
   name: "Board",
 
-  props: {
-    board: {
-      type: Object,
-      default: () => [],
-      required: true,
-    },
+  data() {
+    return {
+      board: this.$store.state.board,
+    };
   },
 
   components: {

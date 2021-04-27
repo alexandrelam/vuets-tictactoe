@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 export const state = () => ({
   board: [
     [" ", " ", " "],
@@ -15,7 +17,10 @@ export const mutations = {
       state.player = "X";
     }
   },
-  play(state, x, y, player) {
-    state.board[x][y] = player;
+  play(state, positionPayload) {
+    const { column, row } = positionPayload;
+    let tmpColumn = state.board[column];
+    tmpColumn[row] = state.player;
+    Vue.set(state.board, column, tmpColumn);
   },
 };
