@@ -10,17 +10,20 @@ export const state = () => ({
 });
 
 export const mutations = {
-  togglePlayer(state) {
-    if (state.player == "X") {
-      state.player = "O";
-    } else {
-      state.player = "X";
-    }
-  },
   play(state, positionPayload) {
     const { column, row } = positionPayload;
     let tmpColumn = state.board[column];
-    tmpColumn[row] = state.player;
-    Vue.set(state.board, column, tmpColumn);
+    if (tmpColumn[row] == " ") {
+      // if you can play then play the move
+      tmpColumn[row] = state.player;
+      Vue.set(state.board, column, tmpColumn);
+
+      // then toggle the player
+      if (state.player == "X") {
+        state.player = "O";
+      } else {
+        state.player = "X";
+      }
+    }
   },
 };

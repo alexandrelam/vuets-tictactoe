@@ -1,11 +1,5 @@
 <template>
-  <div
-    class="cell"
-    @click="
-      togglePlayer();
-      play(positionPayload);
-    "
-  >
+  <div class="cell" @click="play(positionPayload)">
     <h2>
       {{ player }}
     </h2>
@@ -45,7 +39,7 @@ export default Vue.extend({
   },
 
   methods: {
-    ...mapMutations(["togglePlayer", "play"]),
+    ...mapMutations(["play"]),
   },
 });
 </script>
