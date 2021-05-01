@@ -52,3 +52,10 @@ export const isWinner = (state) => {
   }
   return false
 }
+
+export const gameIsFinished = () => {
+  if (isWinner || boardIsFull) {
+    return true
+  }
+  return false
+}

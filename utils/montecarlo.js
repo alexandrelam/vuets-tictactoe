@@ -1,74 +1,83 @@
+import { gameIsFinished } from './game'
+
 class Node {
-  constructor() {
-    this.parent = null;
-    this.child = [];
-    this.board = [[]];
-    this.player = "";
-    this.nbVisite = 0;
-    this.nbVictoire = 0;
-    this.uctScore = 0;
+  constructor () {
+    this.parent = null
+    this.child = []
+    this.board = [[]]
+    this.player = ''
+    this.nbVisite = 0
+    this.nbVictoire = 0
+    this.uctScore = 0
   }
 
-  setParent(parent) {
-    this.parent = parent;
+  setParent (parent) {
+    this.parent = parent
   }
 
-  setChild(childArr) {
-    this.child = childArr;
+  setChild (childArr) {
+    this.child = childArr
   }
 
-  incrementVisite() {
-    this.nbVisite++;
+  incrementVisite () {
+    this.nbVisite++
   }
 
-  incrementVictoire() {
-    this.nbVictoire++;
+  incrementVictoire () {
+    this.nbVictoire++
   }
 
-  setPlayer(player) {
-    this.player = player;
+  setPlayer (player) {
+    this.player = player
   }
 
-  setBoard(board) {
-    this.board = board;
+  setBoard (board) {
+    this.board = board
   }
 
-  updateUctScore(C) {
-    if (this.nbVisite == 0) {
-      this.uctScore = Number.MAX_VALUE;
+  updateUctScore (C) {
+    if (this.nbVisite === 0) {
+      this.uctScore = Number.MAX_VALUE
     } else {
-      const exploitation = this.nbVictoire / this.nbVisite;
+      const exploitation = this.nbVictoire / this.nbVisite
       const exploration =
-        C * Math.sqrt(Math.log(this.parent.nbVisite) / this.nbVisite);
-      this.uctScore = exploitation + exploration;
+        C * Math.sqrt(Math.log(this.parent.nbVisite) / this.nbVisite)
+      this.uctScore = exploitation + exploration
     }
   }
 }
 
 class Tree {
-  constructor() {
-    this.root = new Node();
+  constructor () {
+    this.root = new Node()
   }
 }
 
 const selection = (root) => {
-  childArr = [];
-  while (root.childArr.length) {
-    childArr = root.childArr;
+  let childArr = []
+  let maxVal = Number.MIN_VALUE
+  let maxNode = root
+  while (maxNode.childArr.length || gameIsFinished() === false) {
+    childArr = maxNode.childArr
 
-    childArr.forEach((node) => node.updateUctScore(2));
-
-      max
+    for (let i = 0; i < childArr.length; i++) {
+      childArr[i].updateUctScore(2)
+      if (childArr[i].uctScore > maxVal) {
+        maxVal = childArr[i].uctScore
+        maxNode = childArr[i]
+      }
+    }
   }
-};
+  return maxNode
+}
 
 export const botFindPlay = (plateau) => {
-  let tree = new Tree();
-  let root = tree.root;
+  const tree = new Tree()
+  const root = tree.root
   for (let iter = 0; iter < 5000; iter++) {
-    nodeSelectionne = selection(root);
-    newnode = expansion(nodeSelectionne);
-    winner = simulation(newnode);
-    backpropagation(nodeSelectionne);
+    nodeSelectionne = selection(root)
+    newnode = expansion(nodeSelectionne)
+    winner = simulation(newnode)
+    backpropagation(nodeSelectionne)
   }
-};
+}
