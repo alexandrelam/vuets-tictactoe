@@ -74,13 +74,37 @@ const expansion = (state, node) => {
   return node
 }
 
+const simulation = (state, node) => {
+    let joueurEnCours = node.player
+
+    if(isWinner(state) && ){
+        node.nbVictoire = Number.MAX_VALUE
+        return "X"
+    }
+    
+
+}
+
+function backpropagation(node, winner){
+    let node
+    while(node != null){
+         node.incrementVisite()
+        if(winner === "O"){
+            if(node.player === "O"){
+                node.incrementVictoire()
+            }
+        }
+        node = node.parent
+    }
+}
+
 export const botFindPlay = (state) => {
   const tree = new Tree()
   const root = tree.root
   for (let iter = 0; iter < 5000; iter++) {
-    nodeSelectionne = selection(state, root)
-    newnode = expansion(nodeSelectionne)
-    winner = simulation(newnode)
-    backpropagation(nodeSelectionne)
+    const nodeSelectionne = selection(state, root)
+    const newnode = expansion(state, nodeSelectionne)
+    const winner = simulation(newnode)
+    backpropagation(nodeSelectionne, winner)
   }
 }
