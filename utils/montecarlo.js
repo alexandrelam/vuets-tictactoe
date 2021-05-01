@@ -1,4 +1,4 @@
-import { gameIsFinished } from './game'
+import { gameIsFinished, getListCoup, getJoueurEnnemi } from './game'
 
 class Node {
   constructor () {
@@ -11,28 +11,12 @@ class Node {
     this.uctScore = 0
   }
 
-  setParent (parent) {
-    this.parent = parent
-  }
-
-  setChild (childArr) {
-    this.child = childArr
-  }
-
   incrementVisite () {
     this.nbVisite++
   }
 
   incrementVictoire () {
     this.nbVictoire++
-  }
-
-  setPlayer (player) {
-    this.player = player
-  }
-
-  setBoard (board) {
-    this.board = board
   }
 
   updateUctScore (C) {
@@ -53,11 +37,11 @@ class Tree {
   }
 }
 
-const selection = (root) => {
+const selection = (state, root) => {
   let childArr = []
   let maxVal = Number.MIN_VALUE
   let maxNode = root
-  while (maxNode.childArr.length || gameIsFinished() === false) {
+  while (maxNode.childArr.length || gameIsFinished(state) === false) {
     childArr = maxNode.childArr
 
     for (let i = 0; i < childArr.length; i++) {
@@ -71,11 +55,30 @@ const selection = (root) => {
   return maxNode
 }
 
-export const botFindPlay = (plateau) => {
+const expansion = (state, node) => {
+  if (gameIsFinished(state) === false) {
+    const joueurEnCours = getJoueurEnnemi(node.player)
+    const listCoup = getListCoup(state)
+    const newArrayChild = []
+
+    for (let i = 0; i < listCoup.length; i++) {
+      const tmpNode = new Node()
+      tmpNode.board = state.board
+      tmpNode.parent = node
+      tmpNode.player = joueurEnCours
+      newArrayChild.push(tmpNode)
+    }
+    node.childArr = newArrayChild
+    return node.childArr[0]
+  }
+  return node
+}
+
+export const botFindPlay = (state) => {
   const tree = new Tree()
   const root = tree.root
   for (let iter = 0; iter < 5000; iter++) {
-    nodeSelectionne = selection(root)
+    nodeSelectionne = selection(state, root)
     newnode = expansion(nodeSelectionne)
     winner = simulation(newnode)
     backpropagation(nodeSelectionne)

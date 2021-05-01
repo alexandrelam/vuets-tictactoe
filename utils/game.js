@@ -53,9 +53,25 @@ export const isWinner = (state) => {
   return false
 }
 
-export const gameIsFinished = () => {
-  if (isWinner || boardIsFull) {
+export const gameIsFinished = (state) => {
+  if (isWinner(state) || boardIsFull(state)) {
     return true
   }
   return false
+}
+
+export const getListCoup = (state) => {
+  const res = []
+  for (let i = 0; i < state.board.length; i++) {
+    if (state.board[i] === ' ') {
+      res.push(i)
+    }
+  }
+}
+
+export const getJoueurEnnemi = (state) => {
+  if (state.player === 'X') {
+    return 'O'
+  }
+  return 'X'
 }
